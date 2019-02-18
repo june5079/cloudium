@@ -7,12 +7,13 @@ testawsIPList = ["52.95.245.0/24@us", "52.95.154.0/23@us"]
 testazureIpList = ["52.165.32.0/20@uscentral", "157.55.108.0/23@uscentral"]
 
 
-def awsScan(keyword):
+def awsScan(keyword, output):
     awsKeywordList = keyword
 
     # Scan AWS Public IPs and extract domain including keywords
-    awsCrawler = Certcrawler(awsIPList, testawsKeywordList)
+    awsCrawler = Certcrawler(testawsIPList, awsKeywordList, output)
     awsCrawler.certScanner()
+    awsCrawler.fileWriter()
 
 def azureScan(keyword, output):
     azureKeywordList = keyword
@@ -47,7 +48,7 @@ def main():
     ARGS = PARSER.parse_args()
 
     if ARGS.provider == 'amazon':
-        awsScan(ARGS.keyword)
+        awsScan(ARGS.keyword, ARGS.output)
     elif ARGS.provider == 'azure':
         azureScan(ARGS.keyword, ARGS.output)
 

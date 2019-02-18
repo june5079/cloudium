@@ -1,36 +1,33 @@
 # Cloudium
 
-Cloudium is certification info. extractor from global cloud provider
+Cloudium is certification-info. extractor from global cloud provider
+for security researcher, cloud operators.
+
+<p align="center">
+    <img src="https://noplanlife.com/sample.svg">
+</p>
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+### Dependencies
 
-What things you need to install the software and how to install them
+Python3.x is highly recommended for this tool.
+Simply can install packages with command below.
 
-```
-Give examples
-```
+```sudo pip install -r requirements.txt```
 
-### Installing
+### Example
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+Search keywords from cloud service providers.
+Cloudium supports amazon|azure|gcloud 
 
 ```
-Give the example
+python3 main.py -p amazon -k KEYWORD1 KEYWORD2 KEYWORD3 -o KEYWORD_OUT.txt
 ```
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+Step 0x02 : Get digging with extracted information. - On development
 
 ## Running the tests
 
@@ -44,37 +41,9 @@ Explain what these tests test and why
 Give an example
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-```sudo pip install -r requirements.txt```
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **June Park** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
 ## License
 
