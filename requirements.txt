@@ -1,0 +1,8 @@
+requests
+iptools
+termcolor
+tqdm
+pathos
+pyopenssl
+argparse
+M2Crypto
