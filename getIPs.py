@@ -19,7 +19,7 @@ class getPublicIPs:
             # self.extractAmazonIPs(self.provider)
         elif (self.provider == 'azure') :
             cprint ("[+] Starting extraction from + " + provider, 'green')
-            self.extractAzureIPs(provider)
+            # self.extractAzureIPs(provider)
         elif (self.provider == 'gcloud'):
             cprint ("[+] Starting extraction from + " + provider, 'green')
             process = subprocess.Popen(self.cmdline, shell=True)
@@ -47,7 +47,8 @@ class getPublicIPs:
         print ("[+] Done with " + self.provider)
         return self.amazonpip
 
-    def extractAzureIPs (self, provider):
+    def extractAzureIPs (self):
+        self.azurepip = []
         r = requests.get(self.azureURL)
         res = r.text
         soup = BeautifulSoup(res, 'html.parser')
@@ -60,17 +61,17 @@ class getPublicIPs:
         
         r2 = requests.get(realurl)
         self.parseXml(r2.content)
+        return self.azurepip
     
     def parseXml (self, xmlraw):
-        self.azurepip = []
+
         tree = ElementTree.fromstring(xmlraw)
-        
         for child in tree:
             for child2nd in child:
                 region = child.attrib['Name']
                 pip = child2nd.attrib['Subnet']
-                print (region + "@" + pip)
-                self.azurepip.append(region + "@" + pip)
+                print (pip + "@" + region)
+                self.azurepip.append(pip + "@" + region)
         cprint ("[+] Azure public ip has been sucessfully extracted ", 'green')
 
     def parseTxt (self, textfile):

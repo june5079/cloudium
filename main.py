@@ -2,20 +2,32 @@ from getIPs import getPublicIPs
 from cloudium import Certcrawler
 import iptools, argparse
 
-
+# awsIPList = ["52.95.245.0/24@us", "52.95.154.0/23@us"]
 
 def awsScan(keyword):
     awsKeywordList = keyword
-    # awsIPList = ["52.95.245.0/24@us", "52.95.154.0/23@us"]
     awsResult = []
     
     # Get AWS Public IPs
     aws = getPublicIPs("amazon")
     awsIPList = aws.extractAmazonIPs()
 
-    # Scan AWS Public IPs and extract keywords
+    # Scan AWS Public IPs and extract domain including keywords
     awsCrawler = Certcrawler(awsIPList, awsKeywordList)
     awsCrawler.certScanner()
+
+def azureScan(keyword):
+    azureKeywordList = keyword
+    azureResult = []
+
+    # Get Azure Public IPs
+    azure = getPublicIPs("azure")
+    azureIPList = azure.extractAzureIPs()
+
+    #Scan Azure public IPs and extract domain including keywords
+    azureCrawler = Certcrawler(azureIPList, azureKeywordList)
+    azureCrawler.certScanner()
+
 
 
 def main():
@@ -35,5 +47,8 @@ def main():
 
     if ARGS.provider == 'amazon':
         awsScan(ARGS.keyword)
+    elif ARGS.provider == 'azure':
+        azureScan(ARGS.keyword)
+
 
 main()
