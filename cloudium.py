@@ -8,7 +8,7 @@ from pathos.multiprocessing import ProcessingPool as Pool # Used for tqdm instea
 
 class Certcrawler:
 
-    def __init__(self, ipAddrList, keywordList):
+    def __init__(self, ipAddrList, keywordList, outputFile):
         socket.setdefaulttimeout(1)
 
         self.allipAddrList = ipAddrList
@@ -17,6 +17,7 @@ class Certcrawler:
         self.tryipList = []
         self.ipExtractResult = []
         self.totalRes = []
+        self.outputFile = outputFile
 
         cprint ("[+] Start Cloudium certfication scanner ", 'green')
 
@@ -82,6 +83,11 @@ class Certcrawler:
     
     def returnRes (self):
         return self.totalRes
+    
+    def fileWriter (self):
+        f = open(self.outputFile, "w+")
+        for x in self.totalRes:
+            f.write(x + "\n")
         
 
 
