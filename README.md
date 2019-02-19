@@ -9,7 +9,9 @@ for security researcher, cloud operators.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Tested on linux based OS + Python3 but Windows OS is OK (just I'm not familiar with)
+Prepare keywords what you want to find from SSL certification information.
+Cloudium only extract "CN" info but, you can modify codes to get other info.
 
 ### Dependencies
 
@@ -21,36 +23,20 @@ Simply can install packages with command below.
 ### Example
 
 Search keywords from cloud service providers.
-Cloudium supports amazon|azure|gcloud 
+Cloudium supports aws|azure|gcloud 
 
 ```
 python3 main.py -p amazon -k KEYWORD1 KEYWORD2 KEYWORD3 -o KEYWORD_OUT.txt
 ```
 
-Step 0x02 : Get digging with extracted information. - On development
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+Step 0x02 : Get digging with extracted information. - (On development)
 
 ## Authors
 
-* **June Park** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+**June Park** - *SANE(Security Analysis and Evaluation) Lab in Korea Unviersity* - [Noplanlife.com](https://noplanlife.com)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc

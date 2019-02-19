@@ -12,8 +12,9 @@ def awsScan(keyword, output):
 
     # Scan AWS Public IPs and extract domain including keywords
     awsCrawler = Certcrawler(testawsIPList, awsKeywordList, output)
-    awsCrawler.certScanner()
-    awsCrawler.fileWriter()
+    awsCrawler.shuffleList()
+    # awsCrawler.certScanner()
+    # awsCrawler.fileWriter()
 
 def azureScan(keyword, output):
     azureKeywordList = keyword

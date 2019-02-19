@@ -1,6 +1,7 @@
 import requests, subprocess, time
 import OpenSSL, M2Crypto, ssl, socket
 import iptools
+import random
 from termcolor import colored, cprint
 # from multiprocessing import Process, Queue, Lock, Pool ---> is not stable with tqdm lib
 from tqdm import tqdm
@@ -27,10 +28,16 @@ class Certcrawler:
         self.tryipList = iptools.IpRange(self.IPV4)
 
         return self.tryipList
+   
+    def shuffleList(self):
+        # Shuffle Target IP Lists for avoiding abusing from providers
+        self.shuffledIPList = random.sample(self.allipAddrList, len(self.allipAddrList))
+        return self.shuffledIPList
 
     def certScanner (self) :
         p = Pool(nodes = 256)
         cprint ("[+] Keywords : " + " ".join(str(x) for x in self.keywordList), 'green')
+        self.allipAddrList = self.shuffleList()
 
         for self.tryipClass in self.allipAddrList:
             self.ipExtractResult = self.ipExtract(self.tryipClass.split("@")[0])

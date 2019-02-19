@@ -2,7 +2,7 @@ from getIPs import getPublicIPs
 from cloudium import Certcrawler
 import iptools, argparse
 
-def awsScan(keyword):
+def awsScan(keyword, output):
     awsKeywordList = keyword
     awsResult = []
     
@@ -11,8 +11,9 @@ def awsScan(keyword):
     awsIPList = aws.extractAmazonIPs()
 
     # Scan AWS Public IPs and extract domain including keywords
-    awsCrawler = Certcrawler(awsIPList, awsKeywordList)
+    awsCrawler = Certcrawler(awsIPList, awsKeywordList, output)
     awsCrawler.certScanner()
+    awsCrawler.fileWriter()
 
 def azureScan(keyword):
     azureKeywordList = keyword
@@ -40,10 +41,11 @@ def main():
     PARSER.add_argument('-p', '--provider', help='Input cloud provider : amazon, azure, gcloud', required=True)
     PARSER.add_argument('-k', '--keyword', nargs = "+", help='Input keywords : google, facebook, samsung, Etc.', required=True)
     PARSER.add_argument('-o', '--output', help='Output file name', required=True)
+    PARSER.add_argument('-r', '--region', help='Targeting specific regions : US, Asia, EU, ETC', required=False)
     ARGS = PARSER.parse_args()
 
     if ARGS.provider == 'amazon':
-        awsScan(ARGS.keyword)
+        awsScan(ARGS.keyword, ARGS.output)
     elif ARGS.provider == 'azure':
         azureScan(ARGS.keyword)
 
