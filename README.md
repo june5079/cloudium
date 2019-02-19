@@ -3,7 +3,7 @@
 Cloudium is certification-info. extractor from global cloud provider
 for security researcher, cloud operators.
 
-<p align="center">
+<p align="left">
     <img src="http://noplanlife.com/sample2.svg">
 </p>
 
