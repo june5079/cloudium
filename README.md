@@ -10,7 +10,9 @@ for security researcher, cloud operators.
 ## Getting Started
 
 Tested on linux based OS + Python3 but Windows OS is OK (just I'm not familiar with)
+
 Prepare keywords what you want to find from SSL certification information.
+
 Cloudium only extract "CN" info but, you can modify codes to get other info.
 
 ### Dependencies
@@ -23,10 +25,11 @@ Simply can install packages with command below.
 ### Example
 
 Search keywords from cloud service providers.
-Cloudium supports aws|azure|gcloud 
+Cloudium supports aws|azure|gcloud
+Region depends on what provider you choose 
 
 ```
-python3 main.py -p amazon -k KEYWORD1 KEYWORD2 KEYWORD3 -o KEYWORD_OUT.txt
+python3 main.py -p amazon -k KEYWORD1 KEYWORD2 KEYWORD3 -o KEYWORD_OUT.txt -r us
 ```
 
 Step 0x02 : Get digging with extracted information. - (On development)

@@ -6,3 +6,4 @@ pathos
 pyopenssl
 argparse
 M2Crypto
+bs4
