@@ -2,7 +2,7 @@ from getIPs import getPublicIPs
 from cloudium import Certcrawler
 import iptools, argparse
 
-def awsScan(keyword, output):
+def awsScan(keyword, output, region):
     awsKeywordList = keyword
     awsResult = []
     
@@ -11,11 +11,11 @@ def awsScan(keyword, output):
     awsIPList = aws.extractAmazonIPs()
 
     # Scan AWS Public IPs and extract domain including keywords
-    awsCrawler = Certcrawler(awsIPList, awsKeywordList, output)
+    awsCrawler = Certcrawler(awsIPList, awsKeywordList, output, region)
     awsCrawler.certScanner()
     awsCrawler.fileWriter()
 
-def azureScan(keyword):
+def azureScan(keyword,output, region):
     azureKeywordList = keyword
     azureResult = []
 
@@ -24,7 +24,7 @@ def azureScan(keyword):
     azureIPList = azure.extractAzureIPs()
 
     #Scan Azure public IPs and extract domain including keywords
-    azureCrawler = Certcrawler(azureIPList, azureKeywordList)
+    azureCrawler = Certcrawler(azureIPList, azureKeywordList, output, region)
     azureCrawler.certScanner()
 
 def main():
@@ -41,12 +41,12 @@ def main():
     PARSER.add_argument('-p', '--provider', help='Input cloud provider : amazon, azure, gcloud', required=True)
     PARSER.add_argument('-k', '--keyword', nargs = "+", help='Input keywords : google, facebook, samsung, Etc.', required=True)
     PARSER.add_argument('-o', '--output', help='Output file name', required=True)
-    PARSER.add_argument('-r', '--region', help='Targeting specific regions : US, Asia, EU, ETC', required=False)
+    PARSER.add_argument('-r', '--region', help='Targeting specific regions : All, US, Asia, EU, ETC', required=True)
     ARGS = PARSER.parse_args()
 
     if ARGS.provider == 'amazon':
-        awsScan(ARGS.keyword, ARGS.output)
+        awsScan(ARGS.keyword, ARGS.output, ARGS.region)
     elif ARGS.provider == 'azure':
-        azureScan(ARGS.keyword)
+        azureScan(ARGS.keyword, ARGS.output, ARGS.region)
 
 main()

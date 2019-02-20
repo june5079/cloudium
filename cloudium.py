@@ -9,7 +9,7 @@ from pathos.multiprocessing import ProcessingPool as Pool # Used for tqdm instea
 
 class Certcrawler:
 
-    def __init__(self, ipAddrList, keywordList, outputFile):
+    def __init__(self, ipAddrList, keywordList, outputFile, region):
         socket.setdefaulttimeout(1)
 
         self.allipAddrList = ipAddrList
@@ -19,6 +19,7 @@ class Certcrawler:
         self.ipExtractResult = []
         self.totalRes = []
         self.outputFile = outputFile
+        self.region = region
 
         cprint ("[+] Start Cloudium certfication scanner ", 'green')
 
@@ -35,10 +36,11 @@ class Certcrawler:
         return self.shuffledIPList
 
     def certScanner (self) :
-        p = Pool(nodes = 256)
+        p = Pool(nodes = 512)
         cprint ("[+] Keywords : " + " ".join(str(x) for x in self.keywordList), 'green')
-        self.allipAddrList = self.shuffleList()
-
+        # self.allipAddrList = self.shuffleList()
+        self.allipAddrList = [x for x in self.shuffleList() if self.region in x ]
+        
         for self.tryipClass in self.allipAddrList:
             self.ipExtractResult = self.ipExtract(self.tryipClass.split("@")[0])
             _max = len(self.ipExtractResult)
@@ -82,11 +84,10 @@ class Certcrawler:
         # Delete duplicated data
         self.resSet = set(self.resList)
         self.totalRes.extend(self.resSet)
-        # print ("\n########################################################")
+
         cprint ("[+] Number of result is : " + str(len(self.resSet)), 'yellow')
         for x in self.resSet:
             print (x)
-        print ("\n")
     
     def returnRes (self):
         return self.totalRes
